@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+        //클래스형 컴포넌트
+        //ES6에서 제공되는 클래스 문법을 이용해 랜더링 될 컴포넌트를 정의하는 방법을 제공한다.
+        //클래스 내부에 render() 함수는 반드시 작성해야 하며,
+        //반환값으로는 랜더링될 리액트 엘리먼트들을 정의한다.(일반적으로 JSX 사용함)
+    
+        //컴포넌트 단위로 작성하면 얻어지는 장점
+        //재사용이 가능하다는 것이 가장 큰 장점이다.
+        //(중복되는 엘리먼트를 추상화해서 컴포넌트로 작성하고 재사용하는 것이
+        //리액트가 추구하는 한 가지 방향이다.)
+
+        //컴포넌트를 정의하는 두 가지 방법
+        //1. 클래스형 컴포넌트
+        //2. 함수형 컴포넌트
+
+        //사용하는 것은 함수형 컴포넌트가 더 간결하고 선언하기도 편하며,
+        //메모리도 덜 사용하기 때문에 더 권장되는 방식이다.
+        //하지만 유상태 컴포넌트(state) 사용 및 라이프사이클 기능,
+        //임의의 메소드를 정의하는 등은 클래스형 컴포넌트에서 사용이 가능하다.
+        //이러한 함수형 컴포넌트의 기능적 한계로 혹스(hooks)를 제공하고 있다.
+
+        class Title extends React.Component {
+            render() {
+                return (
+                    <h1>Class Component</h1>
+                );
+            }
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<Title/>)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+
+        // 일반적으로  React로 구현된 애플리케이션은 하나의 루트 DOM 노드를 가진다.
+        // 단,리액트를 기존 앱에 통합하려는 경우 원하는 만큼의 독립된 루트 DOM 노드를 가질 수 있다.(권장 x)
+        const element = (
+            <>
+            <h1>What time is it now?</h1>
+            <h3>It is { new Date().toLocaleDateString() }</h3>
+            </>
+        );
+
+        // ReactDOM.createRoot(루트 DOM 노드)
+        // : 인자로 전달한 노드를 루트 노드로 취급한다.
+        // render(랜더링 할 엘리먼트) :  인자로 전달한 엘리먼트를 루트 노드 내에 랜더링한다.
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+        // state란?
+        // state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미한다.
+        // props는 컴포넌트가 사용되는 과정에서 부모 컴포넌트가 설정하는 값이지만,
+        // state는 컴포넌트 내부에서 결정되는 값이다.
+        // props는 읽기 전용으로 사용되지만, state는 변경되는 값을 관리한다.
+
+        class Counter extends React.Component {
+            
+            // 컴포넌트를 생성할 때 가장 먼저 호출되는 생성자 함수이다.
+            constructor(props) {
+                //부모 컴포넌트로부터 전달받은 props를 부모 클래스의 생성자에 전달한다.
+                super(props);
+                
+                // state를 초기화한다.
+                // state는 생성자 안에서 초기화 하는 경우 this.을 붙인다.
+                // 또한 이름은 반드시 state로 해야 하며,
+                // state에 저장되는 값의 형태는 반드시 object 리터럴 형태로 작성해야 한다.
+                this.state = {
+                    number :0
+                };
+            }
+
+            
+            render() {
+                const { number } = this.state;
+
+                return (
+                    <>
+                        <h1> style= { (number < 0)? {color : 'red'} : {color : 'blue'}} Count : {number}</h1>
+                        <button onClick={() => this.setState({number: number -1}) }>-1</button>
+                        <button onClick={() => this.setState({number: number +1}) }>+1</button>
+                    </>
+                );
+            }
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Counter/>);
+    </script>
+</body>
+</html>

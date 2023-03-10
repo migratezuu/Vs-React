@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+        const answer = 
+        parseInt(window.prompt('리액트가 재밌으신가요?\n1.재미있다.\n2.어렵다'));
+
+
+        //1. 랜더링 시 조건 비교 후 조건부 랜더링 하기
+        // const positiveElement = <h1>앞으로 점점 더 재미있어 질 거에요~</h1>
+        // const negativeElement = <h1>천천히 앞의 내용을 복습해 보세요~</h1>
+        
+        // ReactDOM.render(
+        //     (answer === 1)? positiveElement : negativeElement,
+        //     document.getElementById('root')
+        // );
+
+        // 2. JSX내에서 조건부로 엘리먼트 생성하기
+        // 2-1. if문으로 조건부 엘리먼트 생성하기
+        // let element;
+        // if(answer === 1) {
+        //     element = <h1>앞으로 점점 더 재미있어 질겁니다</h1>;
+
+        // }else{
+        //     element = <h1>천천히 복습하세요 </h1>;
+        // }
+
+        // const element = (answer === 1)? (
+        //     <h1>앞으로 점점 더 재미있어 질거에요</h1>
+        // ):(
+        //     <h1> 천천히 앞의 내용 복습해</h1>
+        // );
+
+        // 2-3. && 연산자를 이용한 조건부 엘리먼트 생성하기
+        // const element = (answer === 1)? <h1> 앞으로 점점 더 재미있어 질 거에요</h1>: null;
+        // const element = answer === 1 &&  <h1> 앞으로 점점 더 재미있어 질 거에요</h1>;
+        
+        //주의 사항
+        //flase 조건을 가지고 랜더링 하는 경우 조건에 일치하지 않으면 랜더링 되는 요소는 없지만
+        //falsy값 중 0을 이용해 조건부 엘리먼트를 생성하게 되면 0을 반환한다.
+        const number = false;
+        const element = undefined && <h1>0이 아닙니다.</h1>;
+
+        ReactDOM.createRoot(document.getElementById('root')).render(element);
+
+    </script>
+
+</body>
+</html>

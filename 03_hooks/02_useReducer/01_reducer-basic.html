@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+
+</head>
+<body>
+    <div id = "root"></div>
+    <script type = "text/babel">
+
+    //useReducer는 다양한 컴포넌트의 state를 업데이트 할 때 사용하는 hook이다.
+    //리듀서를 사용하면 컴포넌트 업데이트 로직을 컴포넌트 밖으로 분리할 수 있다.
+    //리듀서는 새로운 상태를 만들 때 반드시 불변성을 지켜주어야 한다.
+    // (기존 state값을 변경하지 않고 새롭게 만든다. 얕은 복사가 아닌 깊은 복사 활용)  //새로운 객체를 복사해서 사용해라
+
+        const {useReducer} = React;
+
+        //리듀서 함수 (state를 변경하는 로직을 가지는 함수)
+        // 첫 번째 인자는 기존 상태값, 두 번째 인자는 업데이트를 위해 필요한 정보
+        function reducer(state, action){
+            
+            switch(action.type){
+                case 'INCREMENT' :
+                    return{ value : state.value + 1};
+                case 'DECREMENT' :
+                    return { value : state.value -1 };
+                default :
+                    return state;
+            }
+        }
+
+        function Counter() {
+
+            // useReducer 함수의 첫 번재 인자는 리듀서 함수,
+            // 두 번째 인자는 state의 초기값을 넣어준다.
+            // state는 현재 상태이고, dispatch는 액션을 발생시키는 함수이다.
+            const [state, dispatch] = useReducer(reducer, {value : 0});
+
+            return (
+                <>
+                    <h1> count : {state.value} </h1>
+                    <button onClick = {() => dispatch({type : 'DECREMENT'})}> -1</button>
+                    <button onClick = {() => dispatch({type : 'INCREMENT'})}> +1</button>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Counter/>);
+
+
+</script>
+</body>
+</html>

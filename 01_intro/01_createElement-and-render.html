@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        //<h1 id = "greeting">hello world!</h1>
+        const greetingElement = 
+            React.createElement('hi', {id : "greeting"}, 'hello world');
+        const textElement = 
+            React.createElement('h3', {id : 'name'}, '안녕하세요 홍길동이다');
+        
+        // 17버전까지 랜더링 하는 방식
+        // ReactDOM.render(greetingElement, document.getElementById('root'));
+        // ReactDOM.render(textElement, document/getElementById('root'));   //렌더링은 한번만 하기 때문에 덮어 씌워짐
+
+        //16버전 이전의 리액트는 한 엘리먼트만 랜더링 할 수 있었지만,
+        //16버전 이후 배열도 랜더링 할 수 있도록 변경되었다.
+        ReactDOM.render(
+            [greetingElement, textElement],
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>

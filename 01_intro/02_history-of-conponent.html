@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div id = "root"></div>
+    <script>
+        //리액트가 처음 등장한 2013년에는 컴포넌트를 유일하게 만드는 방법이
+        //createClass 함수를 사용하는 것이었다.
+        // 리액트 16(2017년 9월)부터 공식적으로 사용이 금지되었다.
+        // const HelloWorldText = React.createClass({
+        //     displayName : 'helloworld',
+        //     render(){
+        //         return React.createElement(
+        //             'h1',
+        //             {className: 'greeting'},
+        //             'Hello World!'
+        //         );
+        //     }
+        // });
+
+        // ReactDOM.render(
+        //     React.createElement(HelloWorldText),
+        //     document.getElementById('root')
+        // );
+
+        // ES2016(ES6)에 클래스 문법이 도입되면서 리액트에도 리액트 컴포넌트를 
+        // 만드는 새로운 방법이 도입되었다.
+
+        // class HelloWorld extends React.Component{
+        //     render() {
+        //         return React.createElement(
+        //             'h1',
+        //             {className : 'greeting'},
+        //             'Hello World!'
+        //         );
+        //     }
+        // }
+        
+
+        // ReactDOM.render(
+        //     React.createElement(HelloWorld),
+        //     document.getElementById('root')
+        // );
+
+
+        //현재에도 여전히 class 구문을 이용하여 리액트 컴포넌트를 만들 수 있지만,
+        //함수 기반의 컴포넌트를 생성하는 방법이 리액트 16이후 추가되었고,
+        //현재는 함수 기반의 컴포넌트 생성 방식이 주를 이루고 있다.
+        function HelloWorld() {
+            return React.createElement('h1', {className:'geeting'}, 'hello world');
+        }
+
+        ReactDOM.render(
+            React.createElement(HelloWorld),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
