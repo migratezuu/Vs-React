@@ -1,0 +1,25 @@
+.wrap{
+    width : 1600px;
+    margin-left: 140px;
+    margin-right: 140px;
+
+}
+.container{
+    width: 1620px;
+    height : 100vh;
+    display : flex;
+    justify-content: center;
+}
+
+.image {
+    width: 210px;
+    height: 250px;
+    background-color: #E8FEFF;
+    background-size: cover;
+    background-image: url('jeju.png');
+}
+
+.containersemi{
+    display : flex;
+    justify-content: center;
+}

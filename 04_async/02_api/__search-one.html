@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+  //영화 어제꺼 1위부터 10위까지 출력하기
+        const { useState } = React;
+
+        function SearchBox({ setMovieTitle }) {
+            const [dateInput, setDateInput] = useState('');
+            const [rankInput, setRankInput] = useState('');
+
+            const onClickHandler = () => {
+                axios.get(`http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${dateInput}`)
+                    .then(res => {
+                    setMovieTitle( res.data.boxOfficeResult.dailyBoxOfficeList[rankInput - 1].movieNm ) 
+                    });
+                    
+            }
+            return (
+                <>
+                <h2>조회할 날짜 입력</h2>
+                    <input
+                        type="search"
+                        name="dateInput"
+                        value={dateInput}
+                        onChange={e => setDateInput(e.target.value)}
+                    />
+                    <br />
+                    <h2>조회할 순위 입력</h2>
+                    <input
+                        type="search"
+                        name="rank"
+                        value={rankInput}
+                        onChange={e => setRankInput(e.target.value)}
+                    />
+                    <button onClick={onClickHandler}>조회해보쟈</button> 
+                </>
+            );
+        }
+
+        function MovieTitle({ movieTitle }) {
+            return movieTitle ? <h1>{movieTitle}</h1> : null;
+        }
+
+        function App() {
+
+            const [movieTitle, setMovieTitle] = useState('');
+            return (
+                <>
+                    <SearchBox setMovieTitle={setMovieTitle} />
+                    <br />
+                    <MovieTitle movieTitle={movieTitle} />
+
+
+                </>
+
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+
+</body>
+
+</html>
+

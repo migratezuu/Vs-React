@@ -65,9 +65,8 @@ function MainContextCardMy(){
 
             }}   
             >
-                <h2>자기소개 쓸거임 진짜 집가고싶어
-                <br/>
-                <h1>배고파 배고프다구요</h1>    
+                <h2>자기소개
+                <br/> 
                 </h2>    
                 </div> 
         </div>
@@ -77,3 +76,5 @@ function MainContextCardMy(){
     );
 
 }
+
+export default MainContextCardMy;

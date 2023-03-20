@@ -16,7 +16,6 @@ function MainPage() {
             <MenuCard/>
             <MainContextCard/>
             <FooterCard/>
-           
         </>
     );
 }

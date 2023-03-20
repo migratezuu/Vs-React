@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <style>
+        .item {
+            background: white;
+            border: 1px solid black;
+            width: 350px;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>  
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        function Item({ makeup }) {
+
+            return(
+                <div className="item">
+                    <h4>Brand : {makeup.brand} </h4>
+                    <h2> {makeup.name}</h2>
+                    <h4>Type : {makeup.product_type} </h4>
+                    
+                </div>
+            )
+        }
+
+        function ItemList() {
+
+            const [Makeups, setMakeups] = useState([]);
+
+            useEffect(
+                () => {
+                    fetch('http://makeup-api.herokuapp.com/api/v1/products.json')
+                        .then(res =>res.json())
+                        .then(data => setMakeups(data));
+                },
+                []
+            );
+                console.log(Makeups);
+            // console.log(users);
+
+            return (
+                <div>
+                    {Makeups.map(makeup => <Item makeup={ makeup } key={ makeup.id }/>) }    
+                </div>
+            );
+        }
+
+        function Title() {
+
+            return <h1>메이크업</h1>;
+        }
+
+        function App() {
+
+            return (
+                <>
+                    <Title/>
+                    <ItemList/>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+
+    
+    
+</body>
+</html>

@@ -1,6 +1,4 @@
 
-
-
 function Header(){
     const header = {
         name : ''

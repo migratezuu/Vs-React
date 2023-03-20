@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>  
+    <style>
+        .item {
+            background: powderblue;
+            border: 1px solid black;
+            width: 350px;
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>  
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        function Item({ movie }) {
+
+            return(
+                <div className="item">
+                    <h4>{movie.rank} {movie.movieNm}</h4>
+                    
+                </div>
+            )
+        }
+
+        function ItemList() {
+
+            const [movies, setMovies] = useState([]);
+
+            useEffect(
+                () => {
+                    fetch('http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20230312')
+                        .then(res =>res.json())
+                        .then(data => setMovies(data.boxOfficeResult.dailyBoxOfficeList));
+                },
+                []
+            );
+
+            // console.log(users);
+
+            return (
+                <div>
+                    {movies.map(movie => <Item movie={ movie } key={ movie.movieNm }/>) }    
+                </div>
+            );
+        }
+
+        function Title() {
+
+            return <h1>영화 순위</h1>;
+        }
+
+        function App() {
+
+            return (
+                <>
+                    <Title/>
+                    <ItemList/>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .item {
+            background: white;
+            border: 1px solid black;
+            width: 350px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .container {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+
+        function Item({ poke }) {
+
+            const [id, setId] = useState('');
+            const [img, setImg] = useState('');
+
+            useEffect(
+                () => {
+                    fetch(`${poke.url}`)
+                        .then(res => res.json())
+                        .then(res => {
+                            res.sprites.back_default
+                            setImg(res.sprites.back_default);
+                            setId(res.id);
+
+                        });
+                },
+                []
+            );
+
+
+            return (
+                <div className="item">
+                    <div className="container">
+                        <div style={{ margin: 10 }} >
+                            <img src={img} />
+
+                        </div>
+                        <div>
+                            <h2> No : {id}</h2>
+                            <h3>name  : {poke.name} </h3>
+                        </div>
+                    </div>
+
+                </div>
+            )
+        }
+
+        function ItemList() {
+
+            const [Pokes, setPokes] = useState([]);
+            const [btn, setBtn] = useState({});
+
+            useEffect(
+                () => {
+                    fetch('https://pokeapi.co/api/v2/pokemon')
+                        .then(res => res.json())
+                        .then(data => {
+                            setPokes(data.results);
+                            setBtn(data);   
+                        });
+                },
+                []
+            );
+            console.log(Pokes);
+            // console.log(users);
+
+            return (
+                <>
+                <button onClick = {() => {
+                    fetch(btn.previous)
+                        .then(res => res.json())
+                        .then(data => {
+                            setPokes(data.results);
+                            setBtn(data);
+                        });
+                }}>뒤로</button>
+                    <button
+                        onClick={() => {
+                            fetch(btn.next)
+                                .then(res => res.json())
+                                .then(data => {
+                                    setPokes(data.results);
+                                    setBtn(data);
+                                });
+                        }}
+                    >다음</button>
+                <div>
+                    {Pokes.map(poke => <Item poke={poke} key={poke.name} />)}
+                </div>
+            
+                </>
+                );
+        }
+
+        function Title() {
+            return (
+
+            <h1>포켓몬이다~!</h1>
+            );
+        }
+
+        function App() {
+
+            return (
+                <>
+                    <Title />
+                    <ItemList />
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+
+
+</body>
+
+</html>

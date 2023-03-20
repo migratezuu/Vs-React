@@ -1,7 +1,7 @@
 
 
 const onClickGo = () =>window.open('http://www.google.com');
-       
+
 function MenuCard(){
     return (
     <div className = "wrap">    

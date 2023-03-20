@@ -97,7 +97,7 @@ function MainContextCard(){
             </div> 
         </div>
         </div>
-           
+
     );
 
 }

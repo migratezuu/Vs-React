@@ -1,0 +1,12 @@
+.JejuItem {
+    width: 500px;
+    background-color: white;
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+}
+
+.JejuItem:hover {
+    background-color: pink;
+    color: white;
+}

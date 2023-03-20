@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .item {
+            background: white;
+            border: 1px solid black;
+            width: 350px;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .total {
+            background-color: lightblue;
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        function Item({ airport }) {
+
+
+            return (
+                <div className="item">
+                    <div className = "container">
+                        <h2> 공항명 : {airport.IATA_APCD} 공항</h2>
+                        <hr />
+                        <h4> 운영상태 : {airport.OPR_STS_CD === '1' ? '운영중' : '미운영'}</h4>
+                        <h4> 새로고침 시간 : {airport.PRC_HR} </h4>
+                        <hr />
+                        <h4> A GATE : {(airport.STY_TCT_AVG_A / 60).toFixed(1)} 분 소요 예상</h4>
+                        <h4> B GATE : {(airport.STY_TCT_AVG_B / 60).toFixed(1)} 분 소요 예상</h4>
+                        <h4> C GATE : {(airport.STY_TCT_AVG_C / 60).toFixed(1)} 분 소요 예상</h4>
+                        <h4> D GATE : {(airport.STY_TCT_AVG_D / 60).toFixed(1)} 분 소요 예상</h4>
+
+                    </div>
+                </div>
+            )
+        }
+
+        function ItemList() {
+
+            const [Airports, setAirports] = useState([]);
+
+            useEffect(
+                () => {
+                    fetch('http://api.odcloud.kr/api/getAPRTWaitTime/v1/aprtWaitTime?page=1&perPage=10&serviceKey=xJLwIe5cL%2BKtCx7gy50KwmeeF7H8wa7rEhg2PW%2ByWzpEwWjNKrSwPaI6ZTAxv3vvSm1OeIXMYfo0LONBqkIDJg%3D%3D')
+                        .then(res => res.json())
+                        .then(airdata => {
+                            setAirports(airdata.data);
+                        });
+                },
+                []
+            );
+            console.log(Airports);
+            // console.log(users);
+
+            return (
+
+                <div>
+                    {Airports.map(airport => <Item airport={airport} key={airport.IATA_APCD} />)}
+                </div>
+
+            );
+        }
+
+        function Title() {
+            return (
+                <>
+                    <h1>공항별 대기 시간을 알려주지</h1>
+
+                </>
+            );
+        }
+
+        function App() {
+
+            return (
+                <>
+                <div className = "total">
+                    <Title />
+                    <ItemList />
+                </div>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+
+
+</body>
+
+</html>

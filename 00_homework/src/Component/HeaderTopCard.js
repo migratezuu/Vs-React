@@ -5,7 +5,7 @@ const menuBar = {
 
 
 const onClickGo = () =>window.open('http://www.google.com');
-       
+
 function HeaderTopCard(){
     return (
     <div className = "wrap">
